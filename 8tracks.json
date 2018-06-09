@@ -1,0 +1,618 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-06-09T11:21:58.921Z",
+	"__export_source": "insomnia.desktop.app:v5.16.1",
+	"resources": [
+		{
+			"_id": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"created": 1528264232054,
+			"description": "",
+			"modified": 1528264232054,
+			"name": "8tracks",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_01a553d06b7640d0959200cd8326bd24",
+			"color": null,
+			"created": 1528264232120,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1528277805223,
+			"name": "New Environment",
+			"parentId": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_1392dd7fb8ed419295e1bcebfd0b6c75",
+			"cookies": [],
+			"created": 1528264232124,
+			"modified": 1528264232124,
+			"name": "Default Jar",
+			"parentId": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"created": 1528264263195,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1528264263196,
+			"modified": 1528276714326,
+			"name": "tags",
+			"parentId": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"created": 1528295815677,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1525152891569.5,
+			"modified": 1528295824608,
+			"name": "playlists",
+			"parentId": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_0650359cb6ed40afa9c49fe18d55e5cb",
+			"created": 1528386198603,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1528386198603,
+			"modified": 1528386198603,
+			"name": "explore",
+			"parentId": "wrk_6e2b39b5c9df463793aa7370bf8b2717",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_5ced22aade0c449784ba37f73e07b59c",
+			"color": null,
+			"created": 1528264240536,
+			"data": {
+				"base_url": "http://localhost:8080"
+			},
+			"isPrivate": false,
+			"modified": 1528442562570,
+			"name": "dev",
+			"parentId": "env_01a553d06b7640d0959200cd8326bd24",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_d2e539f6d6ba4c9aac58e77799824ba3",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"tag_name\": \"coldplay\",\n\t\"tag_type\": 1\n}"
+			},
+			"created": 1528264282001,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528264282002,
+			"method": "POST",
+			"modified": 1528526323160,
+			"name": "CreateTag",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/tag",
+			"_type": "request"
+		},
+		{
+			"_id": "req_feeae4914d8849ec8a98099811f53bb9",
+			"authentication": {},
+			"body": {},
+			"created": 1528280149412,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1528280149412,
+			"method": "GET",
+			"modified": 1528528673120,
+			"name": "LoadTag",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/tag?names=coldplay;indie",
+			"_type": "request"
+		},
+		{
+			"_id": "req_18d296b44e514c67a70595c3617ceb87",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"tag_name\": \"tag_100\",\n\t\"tag_type\": 2\n}"
+			},
+			"created": 1528281587314,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527957208145,
+			"method": "PUT",
+			"modified": 1528528616298,
+			"name": "UpsertTag",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/tag_100",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d7cb1dec5e7847e3bc8803716af1bbad",
+			"authentication": {},
+			"body": {},
+			"created": 1528289692119,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528110745073.5,
+			"method": "DELETE",
+			"modified": 1528511455442,
+			"name": "RemoveTag",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/1d9be0ad-5ff8-4a78-9be8-8e2e26569e11",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4c5aa363f212405783b495431c1246a4",
+			"authentication": {},
+			"body": {},
+			"created": 1528291435116,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1528272215707,
+			"method": "GET",
+			"modified": 1528350141535,
+			"name": "LoadTagTypes",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/types",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d1be72f84487450186aa50ac1116aa71",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"tag_name\": \"tag_hundred\"\n}"
+			},
+			"created": 1528350716369,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527803671216.5,
+			"method": "PATCH",
+			"modified": 1528511576699,
+			"name": "UpdateTag",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/tag_100",
+			"_type": "request"
+		},
+		{
+			"_id": "req_64714d1cb4324d2da387c12071348f01",
+			"authentication": {},
+			"body": {},
+			"created": 1528357785508,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527803671166.5,
+			"method": "PUT",
+			"modified": 1528525041287,
+			"name": "TagPlaylist",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/548f411f-c71b-4176-a90e-8a0dd22112db/playlists/p_1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6d2fb3aa9cf24748b2f8f8411d201c86",
+			"authentication": {},
+			"body": {},
+			"created": 1528358338625,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527726902727.25,
+			"method": "DELETE",
+			"modified": 1528513294989,
+			"name": "TagPlaylist",
+			"parameters": [],
+			"parentId": "fld_47a15caa84e3492fa4034bccf0c1587d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/tags/b899bbcc-40a8-4e6a-8b97-806c3d404336/playlists/pl_100",
+			"_type": "request"
+		},
+		{
+			"_id": "req_233336dcb67a45b788ce73347448dbc5",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"playlist_name\": \"B\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"tag_id\": \"d5bf7d06-f453-4703-80fe-8ee0256a3a3a\"\n\t\t},\n\t\t{\n\t\t\t\"tag_id\": \"28f6dea0-8b84-4420-afe1-d3cb531f6dd0\"\n\t\t}\n\t],\n\t\"tracks\": [\n\t\t{\n\t\t\t\"id\": \"trk_1\",\n\t\t\t\"name\": \"ada ada\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"trk_2\",\n\t\t\t\"name\": \"blah blah\"\n\t\t}\n\t],\n\t\"creator\": {\n\t\t\"id\": \"user_1\",\n\t\t\"name\": \"Tiger\"\n\t}\n}"
+			},
+			"created": 1528295815684,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528264282002,
+			"method": "POST",
+			"modified": 1528528451639,
+			"name": "CreatePlaylist",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/playlist",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b6e1903e0bd44c9281adb848ed6da493",
+			"authentication": {},
+			"body": {},
+			"created": 1528295815689,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_d15c29471cb941b994200e40064a69e9",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528280149412,
+			"method": "GET",
+			"modified": 1528528717959,
+			"name": "LoadPlaylist",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "\t {{ base_url  }}/playlists/playlist?names=A;B",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ccdae40b1ec24bb8a8e60e18269a7720",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"playlist_name\": \"X\"\n}"
+			},
+			"created": 1528295815694,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527957208145,
+			"method": "PATCH",
+			"modified": 1528510076304,
+			"name": "UpdatePlaylistName",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/6bfaf95d-3068-4f05-af19-3391a3546ee9",
+			"_type": "request"
+		},
+		{
+			"_id": "req_11faeaca67d34394a6696e499232c7b2",
+			"authentication": {},
+			"body": {},
+			"created": 1528295815699,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528110745073.5,
+			"method": "DELETE",
+			"modified": 1528371788308,
+			"name": "RemovePlaylist",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/0118751d-e3e2-4a74-b82a-e711cb43009a",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3f7c67bcf057459092496fec2704d65c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"playlist_name\": \"X\",\n\t\"tracks\": [\n\t\t{\n\t\t\t\"id\": \"trk_1000\",\n\t\t\t\"name\": \"111\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"trk_2000\",\n\t\t\t\"name\": \"22222\"\n\t\t}\n\t],\n\t\"creator\": {\n\t\t\"id\": \"user_1\",\n\t\t\"name\": \"Tiger\"\n\t}\n}\n\n"
+			},
+			"created": 1528357066102,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528033976609.25,
+			"method": "PUT",
+			"modified": 1528482253024,
+			"name": "UpsertPlaylist",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/p_x",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ebe547da8e584e618a99fbcbc6f9ff72",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"three hundred\"\n}"
+			},
+			"created": 1528371676935,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527842055448.625,
+			"method": "PUT",
+			"modified": 1528527432839,
+			"name": "AddTrack",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/2107f50c-8bd6-494b-9701-8fb1ce680c6f/tracks/track_300",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6f56be0548fe41fe954fd3ca01449ca9",
+			"authentication": {},
+			"body": {},
+			"created": 1528372849363,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527822863332.5625,
+			"method": "DELETE",
+			"modified": 1528527515466,
+			"name": "RemoveTrack",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/2107f50c-8bd6-494b-9701-8fb1ce680c6f/tracks/track_300",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8e4237a509e84e3fa17137e71473fe3c",
+			"authentication": {},
+			"body": {},
+			"created": 1528372885173,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527813267274.5312,
+			"method": "POST",
+			"modified": 1528527537447,
+			"name": "Plays",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/2107f50c-8bd6-494b-9701-8fb1ce680c6f/plays",
+			"_type": "request"
+		},
+		{
+			"_id": "req_562c645fd38d4aa3ae74e385b00f91d5",
+			"authentication": {},
+			"body": {},
+			"created": 1528372936575,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527808469245.5156,
+			"method": "POST",
+			"modified": 1528482025626,
+			"name": "Likes",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/08c4998f-73e1-4f98-93c7-41300c706b1d/likes",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9bd863d162624c5885623d3f0737c423",
+			"authentication": {},
+			"body": {},
+			"created": 1528372959552,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b2f75a5d7b004d928a941a22d0fad1f5",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527806070231.0078,
+			"method": "POST",
+			"modified": 1528482039462,
+			"name": "Dislikes",
+			"parameters": [],
+			"parentId": "fld_f77211e69ab846ef984958aaf5f6754d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/playlists/08c4998f-73e1-4f98-93c7-41300c706b1d/dislikes",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1f23e5db28b644d294cf67046a5d9d67",
+			"authentication": {},
+			"body": {},
+			"created": 1528386215798,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1528386215798,
+			"method": "GET",
+			"modified": 1528526398440,
+			"name": "explore",
+			"parameters": [],
+			"parentId": "fld_0650359cb6ed40afa9c49fe18d55e5cb",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}/explore/coldplay+indie",
+			"_type": "request"
+		}
+	]
+}
