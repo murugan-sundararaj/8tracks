@@ -51,6 +51,9 @@ func (d *DAL) storePlaylist(ctx context.Context, p *Playlist) error {
 }
 
 func (d *DAL) createPlaylist(ctx context.Context, p *Playlist) (string, error) {
+	if _, ok := d.playlistNameToID[p.PlaylistName]; ok {
+		return "", ErrPlaylistExist
+	}
 	id, err := uuid.NewV4()
 	if err != nil {
 		return "", errors.Wrap(err, "couldn't generate playlist id")
@@ -98,8 +101,8 @@ func (d *DAL) loadPlaylist(ctx context.Context, playlistIDs []string, playlistNa
 
 func (d *DAL) upsertPlaylist(ctx context.Context, p *Playlist) error {
 	// remove the existing reference
-	if _, ok := d.playlists[p.PlaylistID]; ok {
-		delete(d.playlistNameToID, d.playlists[p.PlaylistID].PlaylistName)
+	if item, ok := d.playlists[p.PlaylistID]; ok {
+		delete(d.playlistNameToID, item.PlaylistName)
 	}
 
 	if err := d.storePlaylist(ctx, p); err != nil {
@@ -109,11 +112,12 @@ func (d *DAL) upsertPlaylist(ctx context.Context, p *Playlist) error {
 }
 
 func (d *DAL) updatePlaylistName(ctx context.Context, playlistID, playlistName string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
 	// remove the existing reference
-	delete(d.playlistNameToID, d.playlists[playlistID].PlaylistName)
+	delete(d.playlistNameToID, item.PlaylistName)
 
 	d.playlists[playlistID].PlaylistName = playlistName
 	d.playlistNameToID[playlistName] = playlistID
@@ -121,52 +125,61 @@ func (d *DAL) updatePlaylistName(ctx context.Context, playlistID, playlistName s
 }
 
 func (d *DAL) removePlaylist(ctx context.Context, playlistID string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
+	delete(d.playlistNameToID, item.PlaylistName)
 	delete(d.playlists, playlistID)
 	return nil
 }
 
 func (d *DAL) addTrack(ctx context.Context, playlistID string, track *Track) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
-	d.playlists[playlistID].Tracks[track.ID] = track
+	item.Tracks[track.ID] = track
 	return nil
 }
 
 func (d *DAL) removeTrack(ctx context.Context, playlistID, trackID string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
-	delete(d.playlists[playlistID].Tracks, trackID)
+	delete(item.Tracks, trackID)
 	return nil
 }
 
 func (d *DAL) plays(ctx context.Context, playlistID string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
-	d.playlists[playlistID].Counter.NumberOfPlays++
+	item.Counter.NumberOfPlays++
 	return nil
 }
 
 func (d *DAL) likes(ctx context.Context, playlistID string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
-	d.playlists[playlistID].Counter.NumberOfLikes++
+	item.Counter.NumberOfLikes++
 	return nil
 }
 
 func (d *DAL) dislikes(ctx context.Context, playlistID string) error {
-	if _, ok := d.playlists[playlistID]; !ok {
+	item, ok := d.playlists[playlistID]
+	if !ok {
 		return ErrInvalidPlaylist
 	}
-	d.playlists[playlistID].Counter.NumberOfLikes--
-	if d.playlists[playlistID].Counter.NumberOfLikes < 0 {
-		d.playlists[playlistID].Counter.NumberOfLikes = 0
+
+	item.Counter.NumberOfLikes--
+
+	if item.Counter.NumberOfLikes < 0 {
+		item.Counter.NumberOfLikes = 0
 	}
 	return nil
 }

@@ -130,6 +130,11 @@ func TestRemoveTag(t *testing.T) {
 	if tagResp.Err != ErrInvalidTag.Error() {
 		t.Errorf("tag not removed")
 	}
+
+	_, err := tagSvc.LoadTagPlaylistID(ctx, "tagA")
+	if err != ErrInvalidTag {
+		t.Errorf("tag name not removed")
+	}
 }
 
 func TestAssignTagToPlaylist(t *testing.T) {

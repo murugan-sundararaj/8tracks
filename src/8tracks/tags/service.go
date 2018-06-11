@@ -39,6 +39,11 @@ func NewService(logger kitlog.Logger, d *DAL) Service {
 func (s *service) CreateTag(ctx context.Context, r *CreateTagRequest) (*CreateTagResponse, error) {
 	tagID, err := s.d.createTag(ctx, r.Tag)
 	if err != nil {
+		if err == ErrTagNameExist {
+			return &CreateTagResponse{
+				Err: err.Error(),
+			}, nil
+		}
 		return nil, errors.Wrap(err, "couldn't create tag")
 	}
 	return &CreateTagResponse{

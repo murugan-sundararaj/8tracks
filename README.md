@@ -214,8 +214,6 @@ specify the actual tag_ids created above
 - All data is stored in memory. Did not want to create additional dependency by introducing datastore for the test problem
 - It is not thread safe
 - Pagination is not implemented
-- Not handling duplicate playlist name
-- Not handling duplicate tag name
 - Not validating the playlist id within the tag service
 - Authentication and Authorization is not implemented
-
+- No transaction. So, no rollback. Partial data is possible.

@@ -33,6 +33,9 @@ func (d *DAL) storeTag(ctx context.Context, t *Tag) error {
 }
 
 func (d *DAL) createTag(ctx context.Context, t *Tag) (string, error) {
+	if _, ok := d.tagNameToID[t.TagName]; ok {
+		return "", ErrTagNameExist
+	}
 	id, err := uuid.NewV4()
 	if err != nil {
 		return "", errors.Wrap(err, "couldn't generate tag id")
@@ -78,24 +81,26 @@ func (d *DAL) upsertTag(ctx context.Context, t *Tag) error {
 }
 
 func (d *DAL) updateTag(ctx context.Context, t *Tag) error {
-	if _, ok := d.tags[t.TagID]; !ok {
+	item, ok := d.tags[t.TagID]
+	if !ok {
 		return ErrInvalidTag
 	}
 	if t.TagName != "" {
 		// remove the existing reference
-		delete(d.tagNameToID, d.tags[t.TagID].TagName)
+		delete(d.tagNameToID, item.TagName)
 		// add
-		d.tags[t.TagID].TagName = t.TagName
+		item.TagName = t.TagName
 		d.tagNameToID[t.TagName] = t.TagID
 	}
 	if t.TagType != Type(0) {
-		d.tags[t.TagID].TagType = t.TagType
+		item.TagType = t.TagType
 	}
 	return nil
 }
 
 func (d *DAL) removeTag(ctx context.Context, tagID string) error {
-	if _, ok := d.tags[tagID]; !ok {
+	item, ok := d.tags[tagID]
+	if !ok {
 		return ErrInvalidTag
 	}
 
@@ -109,6 +114,8 @@ func (d *DAL) removeTag(ctx context.Context, tagID string) error {
 	}
 
 	// remove the tag now
+	delete(d.tagToPlaylists, tagID)
+	delete(d.tagNameToID, item.TagName)
 	delete(d.tags, tagID)
 	return nil
 }
@@ -145,13 +152,22 @@ func (d *DAL) unTagPlayList(ctx context.Context, tagID string, playlistID string
 }
 
 func (d *DAL) loadTagPlaylistID(ctx context.Context, tagName string) (*set.Set, error) {
-	tagID := d.tagNameToID[tagName]
-	if _, ok := d.tagToPlaylists[tagID]; !ok {
+	tagID, ok := d.tagNameToID[tagName]
+	if !ok {
+		return nil, ErrInvalidTag
+	}
+	playlistIDSet, ok := d.tagToPlaylists[tagID]
+	if !ok {
 		return set.New(), nil
 	}
-	return d.tagToPlaylists[tagID], nil
+	return playlistIDSet, nil
 }
 
 func (d *DAL) loadPlaylistTag(ctx context.Context, playlistID string) (*set.Set, error) {
-	return d.playlistToTags[playlistID], nil
+	// tagsvc can not check for the validity of the playlist id as it doesn't own it
+	tagIDSet, ok := d.playlistToTags[playlistID]
+	if !ok {
+		return set.New(), nil
+	}
+	return tagIDSet, nil
 }

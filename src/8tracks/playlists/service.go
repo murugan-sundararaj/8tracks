@@ -45,6 +45,11 @@ func NewService(tagSvc tags.Service, logger kitlog.Logger, d *DAL) Service {
 func (s *service) CreatePlaylist(ctx context.Context, r *CreatePlaylistRequest) (*CreatePlaylistResponse, error) {
 	playlistID, err := s.d.createPlaylist(ctx, r.Playlist)
 	if err != nil {
+		if err == ErrPlaylistExist {
+			return &CreatePlaylistResponse{
+				Err: err.Error(),
+			}, nil
+		}
 		return nil, errors.Wrap(err, "couldn't create playlist")
 	}
 	// update the tag service
@@ -86,13 +91,18 @@ func (s *service) LoadPlaylist(ctx context.Context, r *LoadPlaylistRequest) (*Lo
 			return nil, errors.Wrap(err, "couldn't load playlist tag")
 		}
 
-		tag, err := s.tagSvc.LoadTag(ctx, &tags.LoadTagRequest{
+		tagResp, err := s.tagSvc.LoadTag(ctx, &tags.LoadTagRequest{
 			TagIDs: set.StringSlice(tagIDSet),
 		})
 		if err != nil {
 			return nil, errors.Wrap(err, "couldn't load tag")
 		}
-		playlist.Tags = tag.Tags
+		if tagResp.Err != "" {
+			return &LoadPlaylistResponse{
+				Err: tagResp.Err,
+			}, nil
+		}
+		playlist.Tags = tagResp.Tags
 	}
 
 	return &LoadPlaylistResponse{
